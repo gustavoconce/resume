@@ -253,11 +253,34 @@
         else a.removeAttribute('aria-current');
       });
 
-      // Volta ao topo do painel (desktop rola dentro de .content; mobile, a página)
+      // Cada painel começa do topo (a rolagem acontece dentro de .content)
       $('#content').scrollTop = 0;
-      if (window.innerWidth < 900 && hash) {
-        $('#content').scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-      }
+    }
+  };
+
+  /* ======================================================================
+     7.1 CONFIGURAÇÕES (mobile) — painel de tema/idioma aberto pelo botão
+     ====================================================================== */
+  const settings = {
+    init() {
+      const btn = $('#settingsToggle');
+      const panel = $('#settings');
+
+      const setOpen = (open) => {
+        panel.classList.toggle('is-open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      };
+
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        setOpen(!panel.classList.contains('is-open'));
+      });
+
+      // Fecha ao clicar fora ou pressionar Esc
+      document.addEventListener('click', (e) => {
+        if (!panel.contains(e.target)) setOpen(false);
+      });
+      document.addEventListener('keydown', (e) => e.key === 'Escape' && setOpen(false));
     }
   };
 
@@ -320,6 +343,7 @@
     lang.apply();
     theme.init();
     router.init();
+    settings.init();
     loader.run();
 
     $('#langToggle').addEventListener('click', lang.toggle);

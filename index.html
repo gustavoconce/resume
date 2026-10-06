@@ -38,8 +38,15 @@
     <!-- ================= SIDEBAR ================= -->
     <aside class="sidebar">
       <header class="brand">
-        <a href="#home" class="brand__name">Gustavo Conceição</a>
-        <p class="brand__role" data-i18n="role">Software Developer · Fullstack</p>
+        <div>
+          <a href="#home" class="brand__name">Gustavo Conceição</a>
+          <p class="brand__role" data-i18n="role">Software Developer · Fullstack</p>
+        </div>
+
+        <!-- Botão de configurações (visível apenas no mobile) -->
+        <button type="button" class="settings-btn" id="settingsToggle" aria-label="Configurações de tema e idioma" aria-expanded="false" aria-controls="settings">
+          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+        </button>
       </header>
 
       <nav class="menu" aria-label="Navegação principal">
@@ -56,15 +63,8 @@
         </ul>
       </nav>
 
-      <ul class="links">
-        <li><a href="https://github.com/gustavoconce" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-        <li><a href="https://www.linkedin.com/in/gustavoconce" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
-        <li><a href="https://www.instagram.com/gustaconce" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
-        <li><a href="https://www.youtube.com/@gustaconcedev" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
-      </ul>
-
-      <!-- Controles: tema e idioma -->
-      <div class="controls">
+      <!-- Controles: tema e idioma (no mobile, abrem pelo botão de configurações) -->
+      <div class="controls" id="settings">
         <div class="controls__group" role="group" aria-label="Tema">
           <button type="button" class="opt" data-theme-set="light" aria-pressed="false">Light</button>
           <button type="button" class="opt" data-theme-set="dark" aria-pressed="false">Dark</button>
@@ -156,6 +156,9 @@
         <ul class="actions">
           <li><a href="mailto:gustavo.java@outlook.com" target="_blank" rel="noopener noreferrer" data-i18n="cta.email">Enviar e-mail ↗</a></li>
           <li><a href="https://www.linkedin.com/in/gustavoconce" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+          <li><a href="https://github.com/gustavoconce" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+          <li><a href="https://www.instagram.com/gustaconce" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
+          <li><a href="https://www.youtube.com/@gustaconcedev" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
         </ul>
       </section>
     </main>

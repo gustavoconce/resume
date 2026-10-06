@@ -242,6 +242,35 @@ body.is-loading {
   gap: 2rem;
 }
 
+.brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+/* Botão de configurações (só aparece no mobile) */
+.settings-btn {
+  display: none;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--fg);
+  transition: border-color 0.2s ease, transform 0.3s var(--ease);
+}
+
+.settings-btn:hover,
+.settings-btn[aria-expanded="true"] {
+  border-color: var(--accent);
+}
+
+.settings-btn[aria-expanded="true"] {
+  transform: rotate(90deg);
+}
+
 .brand__name {
   display: inline-block;
   font-size: 1.75rem;
@@ -260,7 +289,7 @@ body.is-loading {
   color: var(--muted);
 }
 
-/* Menu: no mobile vira lista horizontal com quebra */
+/* Menu em lista vertical */
 .menu ul {
   display: flex;
   flex-wrap: wrap;
@@ -295,13 +324,6 @@ body.is-loading {
 
 .menu a[aria-current="page"]::before {
   transform: scale(1);
-}
-
-.links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1.25rem;
-  font-size: 12px;
 }
 
 /* ---------- Controles (tema / idioma) ---------- */
@@ -394,6 +416,11 @@ body.is-loading {
    ========================================================================== */
 .content {
   flex: 1;
+  scrollbar-width: none;        /* Firefox: rola, mas sem barra visível */
+}
+
+.content::-webkit-scrollbar {   /* Chrome / Safari / Edge */
+  display: none;
 }
 
 .panel {
@@ -410,6 +437,11 @@ body.is-loading {
 @keyframes panel-in {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
+}
+
+@keyframes panel-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .eyebrow {
@@ -556,10 +588,6 @@ body.is-loading {
     gap: 0.35rem;
   }
 
-  .links {
-    flex-direction: column;
-  }
-
   .controls {
     margin-top: auto;
   }
@@ -603,6 +631,130 @@ body.is-loading {
 }
 
 /* Telas pequenas: moldura mais próxima da borda */
+/* ==========================================================================
+   7. MOBILE / TABLET — mesma composição do desktop:
+      menu vertical no topo, conteúdo próximo ao rodapé alinhado à direita
+      e tema/idioma escondidos no botão ao lado do nome.
+   ========================================================================== */
+@media (max-width: 899px) {
+  .layout {
+    height: 100vh;
+    height: 100dvh;
+    gap: 1.5rem;
+    overflow: hidden;
+  }
+
+  .sidebar {
+    position: relative;
+    gap: 1.75rem;
+  }
+
+  .settings-btn {
+    display: grid;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  /* Painel suspenso de configurações */
+  .controls {
+    position: absolute;
+    top: 46px;
+    right: 0;
+    z-index: 5;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+    padding: 1rem 1.1rem;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.25s ease, transform 0.25s var(--ease), visibility 0.25s;
+  }
+
+  .controls.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  /* Conteúdo ocupa o espaço restante, ancorado embaixo à direita */
+  .content {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  .panel {
+    animation-name: panel-fade; /* sem deslocamento: evita barra de rolagem durante a entrada */
+    margin-top: auto;           /* empurra para perto do rodapé sem bloquear a rolagem */
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .actions,
+  .tags,
+  .item__links {
+    justify-content: flex-end;
+  }
+
+  .lead,
+  .item__desc {
+    margin-left: auto;
+  }
+
+  .list {
+    align-items: flex-end;
+    gap: 1.5rem;
+  }
+
+  .display {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+  }
+
+  .lead {
+    margin-top: 1rem;
+    font-size: 13px;
+  }
+
+  .lead--lg {
+    font-size: 1.1rem;
+  }
+
+  .actions {
+    gap: 0.5rem 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .tags {
+    margin-top: 1rem;
+    gap: 0.15rem 0.85rem;
+    font-size: 1.05rem;
+  }
+
+  .item__title {
+    font-size: 1.4rem;
+  }
+
+  .item__desc {
+    font-size: 13px;
+  }
+
+  .copyright {
+    position: fixed;
+    left: var(--frame);
+    bottom: 2px;
+    padding: 0;
+    margin: 0;
+    font-size: 9px;
+  }
+}
+
 @media (max-width: 480px) {
   :root {
     --frame: 12px;
