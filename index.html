@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Gustavo Conceição — Desenvolvedor de Software Full Stack.">
-  <meta name="theme-color" content="#0d0d0d">
-  <title>Gustavo Conceição · Portfolio</title>
+  <meta name="description" content="Portfólio de Gustavo Conce — Desenvolvedor de Software Full Stack.">
+  <meta name="theme-color" content="#f5f5f7">
+  <title>gustaconce.dev · Full Stack Developer</title>
 
+  <!-- Fonte monoespaçada para detalhes técnicos -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 
-  <!-- Aplica o tema salvo antes da renderização (evita "flash") -->
+  <!-- Aplica o tema salvo antes da renderização para evitar "flash" -->
   <script>
     try {
       const saved = localStorage.getItem('theme');
@@ -21,150 +22,180 @@
     } catch (_) { /* storage indisponível */ }
   </script>
 </head>
-<body class="is-loading">
+<body>
+  <a class="skip-link" href="#main">Pular para o conteúdo</a>
 
-  <!-- ================= LOADER (animação do nome) ================= -->
-  <div class="loader" id="loader" aria-hidden="true">
-    <p class="loader__text">
-      <span class="loader__name" id="loaderName">Gustavo Conceição</span>
-      <span class="loader__sub">Portfolio</span>
-    </p>
-  </div>
+  <!-- ================= HEADER / NAVEGAÇÃO ================= -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#top" class="logo" aria-label="Início">gustaconce<span>.dev</span></a>
 
-  <!-- Moldura fina ao redor da página -->
-  <div class="frame" aria-hidden="true"></div>
-
-  <div class="layout">
-    <!-- ================= SIDEBAR ================= -->
-    <aside class="sidebar">
-      <header class="brand">
-        <div>
-          <a href="#home" class="brand__name">Gustavo Conceição</a>
-          <p class="brand__role" data-i18n="role">Software Developer · Fullstack</p>
-        </div>
-
-        <!-- Botão de configurações (visível apenas no mobile) -->
-        <button type="button" class="settings-btn" id="settingsToggle" aria-label="Configurações de tema e idioma" aria-expanded="false" aria-controls="settings">
-          <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="16" cy="7" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="17" r="2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
-        </button>
-      </header>
-
-      <nav class="menu" aria-label="Navegação principal">
-        <ul>
-          <li><a href="#home" data-i18n="nav.home">Início</a></li>
-          <li><a href="#about" data-i18n="nav.about">Sobre</a></li>
-          <li><a href="#stack">Stack</a></li>
-          <li><a href="#journey" data-i18n="nav.journey">Trajetória</a></li>
-          <li><a href="#projects" data-i18n="nav.projects">Projetos</a></li>
-          <li><a href="#certs" data-i18n="nav.certs">Certificações</a></li>
-          <li><a href="#youtube">YouTube</a></li>
-          <li><a href="#articles" data-i18n="nav.articles">Artigos</a></li>
-          <li><a href="#contact" data-i18n="nav.contact">Contato</a></li>
+      <nav class="nav" id="nav" aria-label="Navegação principal">
+        <ul class="nav__list">
+          <li><a href="#about" class="nav__link" data-i18n="nav.about">Sobre</a></li>
+          <li><a href="#journey" class="nav__link" data-i18n="nav.journey">Trajetória</a></li>
+          <li><a href="#projects" class="nav__link" data-i18n="nav.projects">Projetos</a></li>
+          <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Contato</a></li>
         </ul>
       </nav>
 
-      <!-- Controles: tema e idioma (no mobile, abrem pelo botão de configurações) -->
-      <div class="controls" id="settings">
-        <div class="controls__group" role="group" aria-label="Tema">
-          <button type="button" class="opt" data-theme-set="light" aria-pressed="false">Light</button>
-          <button type="button" class="opt" data-theme-set="dark" aria-pressed="false">Dark</button>
-        </div>
-        <button type="button" class="lang-switch" id="langToggle" role="switch" aria-checked="false" aria-label="Idioma PT / EN">
-          <span data-lang="pt">PT</span>
+      <div class="header__actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Alternar tema">
+          <svg class="icon-moon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+
+        <!-- Interruptor de idioma: aria-checked="true" = EN -->
+        <button class="lang-switch" id="langToggle" type="button" role="switch" aria-checked="false" aria-label="Idioma: PT / EN">
+          <span class="lang-switch__label" data-lang="pt">PT</span>
           <span class="lang-switch__track" aria-hidden="true"><span class="lang-switch__knob"></span></span>
-          <span data-lang="en">EN</span>
+          <span class="lang-switch__label" data-lang="en">EN</span>
+        </button>
+
+        <button class="icon-btn menu-btn" id="menuToggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav">
+          <span></span><span></span>
         </button>
       </div>
-    </aside>
+    </div>
+  </header>
 
-    <!-- ================= CONTEÚDO ================= -->
-    <main class="content" id="content">
-
-      <!-- Início -->
-      <section class="panel" id="home" aria-labelledby="home-title">
-        <p class="eyebrow" data-i18n="role">Software Developer · Fullstack</p>
-        <h1 class="display" id="home-title" data-i18n="home.quote">“A dedicação realiza sonhos.”</h1>
-        <p class="meta">Kobe Bryant</p>
-        <p class="lead" data-i18n="home.bio">
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="top">
+      <div class="container container--narrow">
+        <p class="eyebrow reveal" data-i18n="hero.eyebrow">Software Developer · Fullstack</p>
+        <h1 class="hero__quote reveal" data-i18n="hero.quote">“A dedicação<br>realiza sonhos.”</h1>
+        <p class="hero__author mono reveal">Kobe Bryant</p>
+        <p class="hero__bio reveal" data-i18n="hero.bio">
           Desenvolvedor de Software Full Stack com experiência em JavaScript (Node JS, React JS), Java, Python e IA,
           utilizando Spec-Driven Development como metodologia principal.
         </p>
-        <ul class="actions">
-          <li><a href="mailto:gustavo.java@outlook.com" target="_blank" rel="noopener noreferrer" data-i18n="cta.email">Enviar e-mail ↗</a></li>
-          <li><a href="https://drive.google.com/drive/folders/1bhDIBPaWuZ3NEqh7a2dMM4yM50elFm3t?usp=sharing" target="_blank" rel="noopener noreferrer" data-i18n="cta.resumePt">Currículo · PT ↗</a></li>
-          <li><a href="https://drive.google.com/drive/folders/1ptNxPKFLZISmTXScek-9aLRKpn5dLvU9?usp=sharing" target="_blank" rel="noopener noreferrer" data-i18n="cta.resumeEn">Currículo · EN ↗</a></li>
-        </ul>
-      </section>
 
-      <!-- Sobre -->
-      <section class="panel" id="about" aria-labelledby="about-title" hidden>
-        <h2 class="display" id="about-title" data-i18n="nav.about">Sobre</h2>
-        <p class="lead lead--lg" data-i18n="about.text">
+        <div class="hero__cta reveal">
+          <a href="mailto:gustavo.java@outlook.com" class="btn btn--primary" target="_blank" rel="noopener noreferrer" data-i18n="cta.email">Enviar e-mail</a>
+          <a href="https://drive.google.com/drive/folders/1ptNxPKFLZISmTXScek-9aLRKpn5dLvU9?usp=sharing" class="btn btn--ghost" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="cta.resumeEn">Currículo · EN</span>
+          </a>
+          <a href="https://drive.google.com/drive/folders/1bhDIBPaWuZ3NEqh7a2dMM4yM50elFm3t?usp=sharing" class="btn btn--ghost" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span data-i18n="cta.resumePt">Currículo · PT</span>
+          </a>
+        </div>
+
+        <ul class="social reveal">
+          <li><a href="https://github.com/gustavoconce" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
+          <li><a href="https://www.linkedin.com/in/gustavoconce" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
+          <li><a href="https://www.instagram.com/gustaconce" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= SOBRE ================= -->
+    <section class="section" id="about">
+      <div class="container container--narrow center">
+        <p class="eyebrow reveal" data-i18n="about.eyebrow">Sobre</p>
+        <p class="about__text reveal" data-i18n="about.text">
           Formado em Sistemas de Informação pela <mark>FIAP</mark>. Tenho <mark>inglês intermediário</mark>
           e sou um verdadeiro apaixonado por <mark>desenvolvimento de software</mark>.
           Fora do VS Code, curto basquete e One Piece :)
         </p>
-      </section>
+      </div>
+    </section>
 
-      <!-- Stack -->
-      <section class="panel" id="stack" aria-labelledby="stack-title" hidden>
-        <h2 class="display" id="stack-title" data-i18n="stack.title">Ferramentas que uso</h2>
-        <ul class="tags" id="stackList"></ul>
-      </section>
+    <!-- ================= STACK ================= -->
+    <section class="section" id="stack">
+      <div class="container center">
+        <p class="eyebrow reveal">Stack</p>
+        <h2 class="section__title reveal" data-i18n="stack.title">Ferramentas que uso</h2>
+        <!-- Preenchido via JS (data.stack) -->
+        <ul class="chips chips--center reveal" id="stackList"></ul>
+      </div>
+    </section>
 
-      <!-- Trajetória -->
-      <section class="panel" id="journey" aria-labelledby="journey-title" hidden>
-        <p class="eyebrow" data-i18n="nav.journey">Trajetória</p>
-        <h2 class="visually-hidden" id="journey-title" data-i18n="journey.title">Onde já trabalhei</h2>
-        <ol class="list" id="journeyList"></ol>
-      </section>
+    <!-- ================= TRAJETÓRIA ================= -->
+    <section class="section" id="journey">
+      <div class="container container--narrow">
+        <div class="center">
+          <p class="eyebrow reveal" data-i18n="journey.eyebrow">Trajetória</p>
+          <h2 class="section__title reveal" data-i18n="journey.title">Onde já trabalhei</h2>
+        </div>
+        <!-- Preenchido via JS (data.journey) -->
+        <ol class="timeline" id="timeline"></ol>
+      </div>
+    </section>
 
-      <!-- Projetos -->
-      <section class="panel" id="projects" aria-labelledby="projects-title" hidden>
-        <p class="eyebrow" data-i18n="projects.subtitle">Porque todo bom dev tem uma pokedex :)</p>
-        <h2 class="visually-hidden" id="projects-title" data-i18n="projects.title">Minha PokeDex</h2>
-        <ol class="list" id="projectsList"></ol>
-      </section>
+    <!-- ================= PROJETOS ================= -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="center">
+          <p class="eyebrow reveal" data-i18n="projects.eyebrow">Projetos</p>
+          <h2 class="section__title section__title--tight reveal" data-i18n="projects.title">Minha PokeDex</h2>
+          <p class="section__subtitle reveal" data-i18n="projects.subtitle">Porque todo bom dev tem uma pokedex :)</p>
+        </div>
+        <!-- Preenchido via JS (data.projects) -->
+        <div class="grid grid--single" id="projectsGrid"></div>
+      </div>
+    </section>
 
-      <!-- Certificações -->
-      <section class="panel" id="certs" aria-labelledby="certs-title" hidden>
-        <p class="eyebrow" id="certs-title" data-i18n="nav.certs">Certificações</p>
-        <ol class="list" id="certsList"></ol>
-      </section>
+    <!-- ================= CERTIFICAÇÕES ================= -->
+    <section class="section" id="certs">
+      <div class="container">
+        <div class="center">
+          <p class="eyebrow reveal" data-i18n="certs.eyebrow">Certificações</p>
+        </div>
+        <!-- Preenchido via JS (data.certs) -->
+        <div class="grid grid--3" id="certsGrid"></div>
+      </div>
+    </section>
 
-      <!-- YouTube -->
-      <section class="panel" id="youtube" aria-labelledby="yt-title" hidden>
-        <p class="eyebrow">YouTube</p>
-        <h2 class="display" id="yt-title" data-i18n="yt.title">Aonde eu penso alto...</h2>
-        <p class="lead" data-i18n="yt.lead">Em breve</p>
-        <ul class="actions">
-          <li><a href="https://www.youtube.com/@gustaconcedev" target="_blank" rel="noopener noreferrer" data-i18n="yt.visit">Visitar o canal ↗</a></li>
-        </ul>
-      </section>
+    <!-- ================= YOUTUBE ================= -->
+    <section class="section" id="youtube">
+      <div class="container">
+        <div class="center">
+          <p class="eyebrow reveal" data-i18n="yt.eyebrow">No YouTube</p>
+          <h2 class="section__title reveal" data-i18n="yt.title">Aonde eu penso alto...</h2>
+          <p class="section__lead reveal" data-i18n="yt.lead">Em breve</p>
+          <a href="https://www.youtube.com/@gustaconcedev" class="btn btn--ghost reveal" target="_blank" rel="noopener noreferrer" data-i18n="yt.visit">Visitar o canal ↗</a>
+        </div>
+        <!-- Vídeos ocultos por enquanto: remova o atributo "hidden" para exibir (data.videos) -->
+        <div class="grid grid--2 grid--spaced" id="videosGrid" hidden></div>
+      </div>
+    </section>
 
-      <!-- Artigos -->
-      <section class="panel" id="articles" aria-labelledby="articles-title" hidden>
-        <p class="eyebrow" data-i18n="articles.lead">Escrevo sobre tecnologia, desenvolvimento de software e experiências.</p>
-        <h2 class="visually-hidden" id="articles-title" data-i18n="articles.title">Algumas anotações públicas</h2>
-        <ol class="list" id="articlesList"></ol>
-      </section>
+    <!-- ================= ARTIGOS ================= -->
+    <section class="section" id="articles">
+      <div class="container">
+        <div class="center">
+          <p class="eyebrow reveal" data-i18n="articles.eyebrow">Artigos</p>
+          <h2 class="section__title reveal" data-i18n="articles.title">Algumas anotações públicas</h2>
+          <p class="section__lead reveal" data-i18n="articles.lead">Escrevo sobre tecnologia, desenvolvimento de software e experiências.</p>
+          <a href="https://www.linkedin.com/in/gustavoconce" class="btn btn--ghost reveal" target="_blank" rel="noopener noreferrer" data-i18n="articles.read">Ler no LinkedIn ↗</a>
+        </div>
+        <!-- Preenchido via JS (data.articles) -->
+        <div class="grid grid--single grid--spaced" id="articlesGrid"></div>
+      </div>
+    </section>
 
-      <!-- Contato -->
-      <section class="panel" id="contact" aria-labelledby="contact-title" hidden>
-        <h2 class="display" id="contact-title" data-i18n="nav.contact">Contato</h2>
-        <p class="lead" data-i18n="contact.lead">Novas conexões nunca são demais!</p>
-        <ul class="actions">
-          <li><a href="mailto:gustavo.java@outlook.com" target="_blank" rel="noopener noreferrer" data-i18n="cta.email">Enviar e-mail ↗</a></li>
-          <li><a href="https://www.linkedin.com/in/gustavoconce" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a></li>
-          <li><a href="https://github.com/gustavoconce" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
-          <li><a href="https://www.instagram.com/gustaconce" target="_blank" rel="noopener noreferrer">Instagram ↗</a></li>
-          <li><a href="https://www.youtube.com/@gustaconcedev" target="_blank" rel="noopener noreferrer">YouTube ↗</a></li>
-        </ul>
-      </section>
-    </main>
-  </div>
+    <!-- ================= CONTATO ================= -->
+    <section class="section contact" id="contact">
+      <div class="container container--narrow center">
+        <h2 class="contact__title reveal" data-i18n="contact.title">Contato</h2>
+        <p class="section__lead reveal" data-i18n="contact.lead">Novas conexões nunca são demais!</p>
+        <div class="hero__cta reveal">
+          <a href="mailto:gustavo.java@outlook.com" class="btn btn--primary" target="_blank" rel="noopener noreferrer" data-i18n="cta.email">Enviar e-mail</a>
+          <a href="https://www.linkedin.com/in/gustavoconce" class="btn btn--ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <footer class="copyright">© <span id="year"></span> Gustavo Conceição</footer>
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span id="year"></span> gustaconce.dev</p>
+    </div>
+  </footer>
 
   <script src="js/main.js" defer></script>
 </body>
